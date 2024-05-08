@@ -1,0 +1,635 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+
+        <title>reveal.js – The HTML Presentation Framework</title>
+
+        <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+        <meta name="author" content="Hakim El Hattab">
+
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <link rel="stylesheet" href="css/reveal.css">
+        <link rel="stylesheet" href="css/theme/black.css" id="theme">
+
+        <!-- Theme used for syntax highlighting of code -->
+        <link rel="stylesheet" href="lib/css/zenburn.css">
+
+        <!-- Printing and PDF exports -->
+        <script>
+            var link = document.createElement( 'link' );
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+            document.getElementsByTagName( 'head' )[0].appendChild( link );
+        </script>
+
+        <!--[if lt IE 9]>
+        <script src="lib/js/html5shiv.js"></script>
+        <![endif]-->
+
+        <style>
+        .lightblueText
+        {
+            color:lightblue;
+        }
+        .yellowText
+        {
+            color:yellow;
+        }
+        .redText
+        {
+            color:red;
+        }
+        .greenText
+        {
+            color:green;
+        }
+        .purpleText
+        {
+            color:rgb(197, 0, 197);
+        }
+    </style>
+    </head>
+
+    <body>
+
+        <div class="reveal">
+
+            <!-- Any section element inside of this container is displayed as a slide -->
+            <div class="slides">
+
+            <!-- Slide:  -->
+            <!-- Premise: This presentation will cover these 4 topics. -->
+            <section>
+                <p style="font-size:100%">Torkel's research</p>
+                <p><img src="images/summary_intro.png"
+                    style="width:100%;" class="plain">
+                </img></p>
+            </section>
+
+            <!-- Slide:  -->
+            <!-- Premise:  -->
+            <section>
+                <p style="font-size:100%">Time-lapse fluorescent microscopy enables single-cell measurements</p>
+                <p> <video controls loop autoplay
+                    style="width:100%;"
+                    src="movies/sigV_movie_label.ogv"/> 
+                </p>        
+                <p style="font-size:80%">Here we measure <span class="lightblueText">σ<sup>V</sup></span> (stress response protein in <i>Bacillus subtilis</i>).</p>
+            </section>
+
+            <!-- Slide:  -->
+            <!-- Premise:  -->
+            <section>
+                <p style="font-size:90%"><span class="lightblueText">σ<sup>V</sup></span> responds through a <span class="lightblueText"><i>heterogeneous activation</i></span> behaviour</p>
+                <p><img src="images/SigV_experiment.png"
+                    style="width:65%;" class="plain">
+                </img></p>
+                <p style="font-size:70%">The time to activation is heterogeneous across an isogenic population.</br>
+                                         Heterogeneity is likely caused by <i>intrinsic molecular noise</i>.</p>
+            </section>
+
+            <!-- Slide:  -->
+            <!-- Premise:  -->
+            <section>
+                <p style="font-size:100%">We use experiments + model prediction/validation steps to study <span class="lightblueText">σ<sup>V</sup></span> (and other sigma factors)</p>
+                <p><img src="images/SigV_modelling.png"
+                    style="width:100%;" class="plain">
+                </img></p>
+                <p style="font-size:75%">Validated models (here stochastic differential equations)</br>can be used to study system dynamics.</p>
+            </section>
+
+            <!-- Slide:  -->
+            <!-- Premise:  -->
+            <section>
+                <p style="font-size:90%">We also study general stress response factor <span class="yellowText">σ<sup>B</sup></span></p>
+                <p><img src="images/SigB_experiment.png"
+                    style="width:85%;" class="plain">
+                </img></p>
+                <p style="font-size:80%">It can exhibit a <span class="yellowText"><i>stochastic pulsing</i></span> response.</p>
+            </section>
+
+            <!-- Slide:  -->
+            <!-- Premise:  -->
+            <section>
+                <p style="font-size:90%">Central question of systems biology: </br>
+                                          How do biological networks generate dynamic behaviours?</p>
+                <p><img src="images/sigma_factor_networks.png"
+                    style="width:85%;" class="plain">
+                </img></p>
+                <p style="font-size:80%">(<span class="lightblueText">σ<sup>V</sup></span> and <span class="yellowText">σ<sup>B</sup></span> networks, "for show")</p>
+            </section>
+
+            <!-- Slide:  -->
+            <!-- Premise:  -->
+            <section>
+                <p style="font-size:100%">Both the <span class="lightblueText">σ<sup>V</sup></span> and <span class="yellowText">σ<sup>B</sup></span> circuits contain a</br> <i>mixed positive/negative feedback loop</i></p>
+                <p><img src="images/general_circuit_two_behaviours.png"
+                    style="width:48%;" class="plain">
+                </img></p>
+                <p style="font-size:80%">Can this motif explain the two distinct response behaviours?</p>
+            </section>
+
+
+            <!-- Slide: The simple network we will model. -->
+            <!-- Premise: Our model constitutes of a sigma factor activating itself, and de-activating itself with a time delay. -->
+            <section>
+                <p>We model a mixed positive/negative feedback loop</p>
+                <p><img src="images/model_network.png"
+                    style="width:75%;" class="plain">
+                </img></p>
+                <p style="font-size:70%">The negative feedback is subject to a <i>time delay</i>.</p>
+                <p style="font-size:70%">System noise is accounted for by through stochastic simulations.</p>
+            </section>
+
+
+            <!-- Slide: The model parameters. -->
+            <!-- Premise: The model system is determined by only 3 parameters. -->
+            <section>
+                <p>The model depends on only three parameters:</p>
+                    <ul>
+                        <li style="color:red;font-size:70%"><i>S</i>: The strength of the self-activation loop.</li>
+                        <li style="color:rgb(216, 0, 216);font-size:70%"><i>D</i>: The strength of the self-deactivation loop.</li>
+                        <li style="color:green;font-size:70%"><i>τ</i>: The length of the self-deactivation delay.</li>
+                    </ul>
+                <p><img src="images/model_network_color_coded.png"
+                    style="width:75%;" class="plain">
+                </img></p>
+                <p style="font-size:70%">The system's behaviour is determined by these three properties.</p>
+                <p style="font-size:60%">(Three additional parameters exist, but are omitted in this presentation)</p>
+            </section>
+
+
+            <!-- Slide: How the model works. -->
+            <!-- Premise: The model input is a stress level, it returns the sigma factor activity -->
+            <section>
+                <p>For a given stress input, the model output corresponding sigma factor activity</p>
+                <p><img src="images/model_description.png"
+                    style="width:75%;" class="plain">
+                </img></p>
+                <p style="font-size:60%">Noise is implemented through the <i>chemical Langevin equations</i>.</p>
+            </section>
+
+
+            <!-- Slide: Example of stress responses. -->
+            <!-- Premise: For a given parameter set, there's a specific stress response.  -->
+            <section>
+                <p style="font-size:85%">For every parameter set, we get a specific response behaviour</p>
+                <p><img src="images/response_examples.png"
+                    style="width:100%;" class="plain">
+                </img></p>
+                <div style="height:30px;"></div>
+                <p style="font-size:70%">Here we can recreate the behaviours of both the <span class="lightblueText">σ<sup>V</sup></span> and <span class="yellowText">σ<sup>B</sup></span> systems.</p>
+            </section>
+
+
+            <!-- Slide: All stress responses of the system. -->
+            <!-- Premise: We have found all of the possible ways such a system may respond.  -->
+            <section>
+                <p style="font-size:80%">We have found all the possible response behaviours of the system</p>
+                <p><img src="images/all_behaviours.png"
+                    style="width:220%;" class="plain">
+                </img></p>
+                    <p style="font-size:70%">(We use an automated algorithm to classify a parameter set)</p>
+            </section>
+
+
+                            <!-- Slide: Description of how the map is made.. -->
+                            <!-- Premise: Step by step, we construct the parameter space behaviour map.  -->
+                            <section  data-transition="slide-in none-out">
+                                <p>We can map these behaviours across parameter space</p>
+                                <p><img src="images/make_behaviour_map_0.png"
+                                    style="width:80%;" class="plain">
+                                    <p style="opacity:0.0;font-size:50%">(<span class="greenText"><i>τ</i> = length of self-deactivation delay</span>)</p>
+                                </img></p>
+                            </section>
+
+                            <!-- Slide: Description of how the map is made.. -->
+                            <!-- Premise: Step by step, we construct the parameter space behaviour map.  -->
+                            <section data-transition="none">
+                                <p>We can map these behaviours across parameter space</p>
+                                <p><img src="images/make_behaviour_map_1.png"
+                                    style="width:80%;" class="plain">
+                                    <p style="font-size:50%">(<span class="greenText"><i>τ</i> = length of self-deactivation delay</span>)</p>
+                                </img></p>
+                            </section>
+
+                            <!-- Slide: Description of how the map is made.. -->
+                            <!-- Premise: Step by step, we construct the parameter space behaviour map.  -->
+                            <section data-transition="none">
+                                <p>We can map these behaviours across parameter space</p>
+                                <p><img src="images/make_behaviour_map_2.png"
+                                    style="width:80%;" class="plain">
+                                    <p style="font-size:50%">(<span class="purpleText"><i>D</i> = strength of self-deactivation</span>, &nbsp; <span class="greenText"><i>τ</i> = length of self-deactivation delay</span>)</p>
+                                </img></p>
+                            </section>
+
+                            <!-- Slide: Description of how the map is made.. -->
+                            <!-- Premise: Step by step, we construct the parameter space behaviour map.  -->
+                            <section data-transition="none">
+                                <p>We can map these behaviours across parameter space</p>
+                                <p><img src="images/make_behaviour_map_3.png"
+                                    style="width:80%;" class="plain">
+                                    <p style="font-size:50%">(<span class="redText"><i>S</i> = strength of self-activation</span>, &nbsp; <span class="purpleText"><i>D</i> = strength of self-deactivation</span>, &nbsp; <span class="greenText"><i>τ</i> = length of self-deactivation delay</span>)</p>
+                                </img></p>
+                            </section>
+
+                            <!-- Slide: Description of how the map is made.. -->
+                            <!-- Premise: Step by step, we construct the parameter space behaviour map.  -->
+                            <section data-transition="none">
+                                <p>We can map these behaviours across parameter space</p>
+                                <p><img src="images/make_behaviour_map_4.png"
+                                    style="width:80%;" class="plain">
+                                    <p style="font-size:50%">(<span class="redText"><i>S</i> = strength of self-activation</span>, &nbsp; <span class="purpleText"><i>D</i> = strength of self-deactivation</span>, &nbsp; <span class="greenText"><i>τ</i> = length of self-deactivation delay</span>)</p>
+                                </img></p>
+                            </section>
+
+                            <!-- Slide: Description of how the map is made.. -->
+                            <!-- Premise: Step by step, we construct the parameter space behaviour map.  -->
+                            <section data-transition="none">
+                                <p>We can map these behaviours across parameter space</p>
+                                <p><img src="images/make_behaviour_map_5.png"
+                                    style="width:80%;" class="plain">
+                                    <p style="font-size:50%">(<span class="redText"><i>S</i> = strength of self-activation</span>, &nbsp; <span class="purpleText"><i>D</i> = strength of self-deactivation</span>, &nbsp; <span class="greenText"><i>τ</i> = length of self-deactivation delay</span>)</p>
+                                </img></p>
+                            </section>
+
+                            <!-- Slide: Description of how the map is made.. -->
+                            <!-- Premise: Step by step, we construct the parameter space behaviour map.  -->
+                            <section data-transition="none">
+                                <p>We can map these behaviours across parameter space</p>
+                                <p><img src="images/make_behaviour_map_6.png"
+                                    style="width:80%;" class="plain">
+                                    <p style="font-size:50%">(<span class="redText"><i>S</i> = strength of self-activation</span>, &nbsp; <span class="purpleText"><i>D</i> = strength of self-deactivation</span>, &nbsp; <span class="greenText"><i>τ</i> = length of self-deactivation delay</span>)</p>
+                                </img></p>
+                            </section>
+
+                            <!-- Slide: Description of how the map is made.. -->
+                            <!-- Premise: Step by step, we construct the parameter space behaviour map.  -->
+                            <section data-transition="none">
+                                <p>We can map these behaviours across parameter space</p>
+                                <p><img src="images/make_behaviour_map_7.png"
+                                    style="width:80%;" class="plain">
+                                    <p style="font-size:50%">(<span class="redText"><i>S</i> = strength of self-activation</span>, &nbsp; <span class="purpleText"><i>D</i> = strength of self-deactivation</span>, &nbsp; <span class="greenText"><i>τ</i> = length of self-deactivation delay</span>)</p>
+                                </img></p>
+                            </section>
+
+                            <!-- Slide: Description of how the map is made.. -->
+                            <!-- Premise: Step by step, we construct the parameter space behaviour map.  -->
+                            <section data-transition="none">
+                                <p>We can map these behaviours across parameter space</p>
+                                <p><img src="images/make_behaviour_map_8.png"
+                                    style="width:80%;" class="plain">
+                                    <p style="font-size:50%">(<span class="redText"><i>S</i> = strength of self-activation</span>, &nbsp; <span class="purpleText"><i>D</i> = strength of self-deactivation</span>, &nbsp; <span class="greenText"><i>τ</i> = length of self-deactivation delay</span>)</p>
+                                </img></p>
+                            </section>
+
+                            <!-- Slide: Description of how the map is made.. -->
+                            <!-- Premise: Step by step, we construct the parameter space behaviour map.  -->
+                            <section  data-transition="none">
+                                <p>We can map these behaviours across parameter space</p>
+                                <p><img src="images/make_behaviour_map_9.png"
+                                    style="width:80%;" class="plain">
+                                    <p style="font-size:50%">(<span class="redText"><i>S</i> = strength of self-activation</span>, &nbsp; <span class="purpleText"><i>D</i> = strength of self-deactivation</span>, &nbsp; <span class="greenText"><i>τ</i> = length of self-deactivation delay</span>)</p>
+                                </img></p>
+                            </section>
+
+
+                            <!-- Slide: Map of all stress responses. -->
+                            <!-- Premise: We have mapped where in parameter space the different behaviours occur.  -->
+                            <section  data-transition="none">
+                                <p>We can map these behaviours across parameter space</p>
+                                <p><img src="images/make_behaviour_map_full.png"
+                                    style="width:80%;" class="plain">
+                                    <p style="font-size:50%">(<span class="redText"><i>S</i> = strength of self-activation</span>, &nbsp; <span class="purpleText"><i>D</i> = strength of self-deactivation</span>, &nbsp; <span class="greenText"><i>τ</i> = length of self-deactivation delay</span>)</p>
+                                </img></p>
+                            </section>
+
+
+            <!-- Slide: Mapping systems -->
+            <!-- Premise: By identifying their behavioural type, we can map real behaviours on the map. -->
+            <section>
+                <p style="font-size:100%">We can place real systems on our map</p>
+                <p><img src="images/real_behaviours_mapped.png"
+                    style="width:100%;" class="plain">
+                </img></p>
+                <p style="font-size:70%">This makes predictions on their system properties.</p>
+            </section>
+
+
+            <!-- Slide: Predicting a transition for sigB -->
+            <!-- Premise: The mode predicts a transition as stress is varied in the sigB system. -->
+            <section>
+            <p style="font-size:75%">The model predicts a behavioural transition as a parameter is varied</p>
+            <p><img src="images/sigB_behavioural_transition.png"
+                style="width:100%;" class="plain">
+            </img></p>
+            <p style="font-size:55%">This transition should be observable in the <span class="yellowText">σ<sup>B</sup></span> system (which contains <span class="yellowText"><i>stochastic pulsing</i></span>).</p>
+            </section>
+
+
+            <!-- Slide: Confirming the prediction in SigB -->
+            <!-- Premise: The behaviour transition predicted by the model is observable in the real system. -->
+            <section>
+                <p style="font-size:100%">We can modulate the parameter <span class="redText"><i>S</i></span> in a real circuit</p>
+                <p><img src="images/sigB_transition_experiment.png"
+                    style="width:100%;" class="plain">
+                </img></p>
+                <p style="font-size:75%">This confirms that <span class="yellowText">σ<sup>B</sup></span> undergoes the predicted transition.</p>
+                <p style="font-size:55%">Here, <span class="redText">IPTG</span> levels corresponds to <span class="redText"><i>S</i></span>. For each level of <span class="redText">IPTG</span>, three repeated experiments are shown.</p>
+             <div style="height:10px;"></div>
+            </section>
+
+
+            <!-- Slide: Confirming the prediction in SigB -->
+            <!-- Premise: The behaviour transition predicted by the model is observable in the real system. -->
+            <section>
+                <p style="font-size:80%">We can classify model and experiment behaviours as <span class="redText"><i>S</i></span> is varied</p>
+                <p><img src="images/sigB_behaviour_classification.png"
+                    style="width:60%;" class="plain">
+                </img></p>
+                <p style="font-size:70%">A similar transition occurs in both systems.</p>
+            </section>
+
+            <!-- Slide:  -->
+            <!-- Premise:  -->
+            <section>
+                <p style="font-size:100%">We can validate other transition (using <span class="lightblueText">σ<sup>V</sup></span> as base)</p>
+                <p><img src="images/additional_transitions.png"
+                    style="width:75%;" class="plain">
+                </img></p>
+                <p style="font-size:80%">We can even vary <span class="redText"><i>S</i></span> and <span class="purpleText"><i>D</i></span> simultaneously.</p>
+                <p style="font-size:60%">(By adding <i>15</i> additional anti-σ<sup>V</sup> genes to the bacteria!)</p>
+            </section>
+
+            <!-- Slide:  -->
+            <!-- Premise:  -->
+            <section>
+                <p><img src="images/sigma_summary.png"
+                    style="width:70%;" class="plain">
+                </img></p>
+                <p style="font-size:70%">Sigma factors are used as regulators in synthetic biology.</br>We describe how to tune your regulator to achieve desired behaviours.</p>
+            </section>
+
+            <!-- Slide:  -->
+            <!-- Premise:  -->
+            <section>
+                <p style="font-size:100%">But how do we actually model these systems?</p>
+                <p><img src="images/binding_CRN_equations.png"
+                    style="width:85%;" class="plain">
+                </img></p>
+                <p style="font-size:80%">The <i>chemical Langevin equation</i> requires one term for each reaction.</p>
+            </section>
+
+            <!-- Slide:  -->
+            <!-- Premise:  -->
+            <section>
+                <p style="font-size:80%">However, all information is encoded in a small number of reactions.</p>
+                <p><img src="images/binding_CRN_reactions.png"
+                    style="width:85%;" class="plain">
+                </img></p>
+                <p style="font-size:80%"></p>
+            </section>
+
+            <!-- Slide:  -->
+            <!-- Premise:  -->
+            <section>
+                <p style="font-size:100%">What if we could implement models in this form?</p>
+                <p><img src="images/Catalyst_binding_model.png"
+                    style="width:85%;" class="plain">
+                </img></p>
+                <p style="font-size:80%">This is the idea behind the Catalyst.jl software.</p>
+            </section>
+
+            <!-- Slide:  -->
+            <!-- Premise:  -->
+            <section>
+                <p><img src="images/Catalyst_simulations.png"
+                    style="width:100%;" class="plain">
+                </img></p>
+            </section>
+
+            <!-- Slide:  -->
+            <!-- Premise:  -->
+            <section>
+                <p style="font-size:100%">Next step: Make simulations fast</p>
+                <p><img src="images/benchmarks.png"
+                    style="width:85%;" class="plain">
+                </img></p>
+                <p style="font-size:80%">Catalyst offers a big speed-up when compared to alternatives.</p>
+            </section>
+
+            <!-- Slide:  -->
+            <!-- Premise:  -->
+            <section>
+                <p style="font-size:100%">Examples of additional Catalyst features</p>
+                <p><img src="images/Catalyst_features.png"
+                    style="width:75%;" class="plain">
+                </img></p>
+            </section>
+
+            <!-- Slide:  -->
+            <!-- Premise:  -->
+            <section>
+                <p style="font-size:100%">A recent addition: spatial modelling</p>
+                <div style="text-align: center; float: left;width:50%;">
+                    <p> <video controls loop autoplay
+                        style="width:84%;"
+                        src="movies/cells.ogv"/> 
+                    </p>            
+                </div>
+                <div style="text-align: center; float: left;width:50%;">
+                    <p> <video controls loop autoplay
+                        style="width:100%;"
+                        src="movies/stochastic_cells.ogv"/> 
+                    </p>            
+                </div>
+                <p style="font-size:80%">We have implemented both deterministic and stochastic solvers</p>
+                <p style="font-size:70%">(Videos looped)</p>
+            </section>
+
+            <!-- Slide:  -->
+            <!-- Premise:  -->
+            <section>
+                <p style="font-size:100%">We have also worked on data-drive modelling tools</p>
+                <p><img src="images/PEtab.png"
+                    style="width:85%;" class="plain">
+                </img></p>
+                <p style="font-size:80%">PEtab.jl supports parameter fitting for Catalyst models.</p>
+            </section>
+
+            <!-- Slide:  -->
+            <!-- Premise:  -->
+            <section>
+                <p style="font-size:90%">We have high-performance methods for CRN simulation,</br>
+                                          but what should we do with them?</p>
+                <p><img src="images/catalysis_chain_networks_1.png"
+                    style="width:85%;" class="plain">
+                </img></p>
+                <p style="font-size:80%">We investigate (parameter identifiability) in <i>catalysis chain networks</i>.</p>
+            </section>
+
+            <!-- Slide:  -->
+            <!-- Premise:  -->
+            <section>
+                <p style="font-size:90%">Catalysis chain networks are used in chemical synthesis</p>
+                <p><img src="images/catalysis_chain_networks_2.png"
+                    style="width:85%;" class="plain">
+                </img></p>
+                <p style="font-size:80%">Finding their parameters is required to optimise chemical production pipelines.</p>
+            </section>
+
+            <!-- Slide:  -->
+            <!-- Premise:  -->
+            <section>
+                <p style="font-size:90%">Parameters are fitted from data</p>
+                <p><img src="images/chemical_experiments.png"
+                    style="width:80%;" class="plain">
+                </img></p>
+                <p style="font-size:70%">Practically, experiments are carried out using various initial conditions.</br>
+                                         Next, parameters are found that enable simulations to replicate the data.</p>
+            </section>
+
+            <!-- Slide:  -->
+            <!-- Premise:  -->
+            <section>
+                <p style="font-size:100%">Parameter identifiability problems common</p>
+                <p><img src="images/profile_liklihood_analysis.png"
+                    style="width:85%;" class="plain">
+                </img></p>
+                <p style="font-size:70%">Profile likelihood analysis can be used to determine identifiability.</p>
+            </section>
+
+            <!-- Slide:  -->
+            <!-- Premise:  -->
+            <section>
+                <p style="font-size:85%">We produce synthetic data for various experimental conditions</p>
+                <p><img src="images/chemical_experiment_types.png"
+                    style="width:85%;" class="plain">
+                </img></p>
+                <p style="font-size:60%">Next, parameter identifiability is determined across a 6-dimensional experiment space.</p>
+            </section>
+
+            <!-- Slide:  -->
+            <!-- Premise:  -->
+            <section>
+                <p style="font-size:80%">For each setting, we determine fraction of parameter identifiability</p>
+                <p><img src="images/identifiability_trends.png"
+                    style="width:85%;" class="plain">
+                </img></p>
+                <p style="font-size:75%">Example analysis: Here we show that initial condition noise is more problematic than measurement noise.</p>
+            </section>
+
+            <!-- Slide:  -->
+            <!-- Premise:  -->
+            <section>
+                <p style="font-size:100%">We can fit parameters, but what is next?</p>
+                <p><img src="images/catalysis_chain_unknown_reactions.png"
+                    style="width:100%;" class="plain">
+                </img></p>
+                <p style="font-size:80%">Catalysis chain network typically contains unknown reactions.</p>
+            </section>
+
+            <!-- Slide:  -->
+            <!-- Premise:  -->
+            <section>
+                <p style="font-size:100%">Is it possible to discovery these reactions from data?</p>
+                <p><img src="images/catalysis_chain_networks_discovery.png"
+                    style="width:100%;" class="plain">
+                </img></p>
+                <p style="font-size:80%">I.e. to perform <i>model discovery</i>.</p>
+            </section>
+
+            <!-- Slide:  -->
+            <!-- Premise:  -->
+            <section>
+                <p style="font-size:100%">Methods for model discovery exists</p>
+                <p><img src="images/catalysis_chain_networks_discovery_identifiability.png"
+                    style="width:100%;" class="plain">
+                </img></p>
+                <p style="font-size:80%">However, model discovery identifiability is less studied.</p>
+            </section>
+
+            <!-- Slide:  -->
+            <!-- Premise:  -->
+            <section>
+                <p style="font-size:100%">Thanks to my research groups</p>
+                <p><img src="images/acknowledgement.png"
+                    style="width:50%;" class="plain">
+                </img></p>
+                <p style="font-size:80%"></p>
+            </section>
+
+            <!-- Slide:  -->
+            <!-- Premise:  -->
+            <section>
+                <p style="font-size:100%">Thank you</p>
+                <p><img src="images/summary_end.png"
+                    style="width:100%;" class="plain">
+                </img></p>
+                <p style="font-size:80%"></p>
+            </section>
+
+            <!-- Slide:  -->
+            <!-- Premise:  -->
+            <section>
+                <p style="font-size:100%"></p>
+                <p><img src="images/sigV_bif_dia.png"
+                    style="width:60%;" class="plain">
+                </img></p>
+                <p style="font-size:80%"></p>
+            </section>
+
+            <!-- Slide:  -->
+            <!-- Premise:  -->
+            <section>
+                <p style="font-size:90%"><span class="yellowText"><i>Stochastic pulsing</i></span> behaviour over time and in phase space</p>
+                <p> <video controls loop autoplay
+                    style="width:100%;"
+                    src="movies/stochastic_pulsing_simulations.ogv"/> 
+                </p>     
+            </section>
+
+
+            </div>
+
+        </div>
+
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.js"></script>
+
+        <script>
+
+            // More info https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                controls: true,
+                progress: true,
+                history: true,
+                center: true,
+
+                transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+                // More info https://github.com/hakimel/reveal.js#dependencies
+                dependencies: [
+                    { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                    { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+                    { src: 'plugin/search/search.js', async: true },
+                    { src: 'plugin/zoom-js/zoom.js', async: true },
+                    { src: 'plugin/notes/notes.js', async: true },
+                    { src: 'plugin/math/math.js', async: true }
+                ]
+            });
+            Reveal.configure({ slideNumber: true });
+
+        </script>
+
+    </body>
+</html>
